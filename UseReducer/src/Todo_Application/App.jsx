@@ -4,8 +4,13 @@ import MainContent from "./MainContent";
 
 import "./index.css";
 
-const initial = {
+let initial = {
   modal: false,
+  todo: [],
+
+  DeleteId: undefined,
+
+  inputValue: "",
 };
 
 function reducer(state, action) {
@@ -21,6 +26,25 @@ function reducer(state, action) {
         ...state,
         modal: (state.modal = false),
       };
+
+    case "inputs":
+      return {
+        ...state,
+        inputValue: action.payLoad,
+      };
+
+    case "add_todo":
+      return {
+        ...state,
+        todo: [...state.todo, state.inputValue],
+      };
+
+    case "delete":
+      return {
+        ...state,
+        DeleteId: action.id,
+        todo: state.todo.filter((tod, i) => i !== action.id),
+      };
   }
 }
 
@@ -31,7 +55,7 @@ const App = () => {
     <div className="App">
       <Header state={state} dispatch={dispatch} />
 
-      <MainContent />
+      <MainContent state={state} dispatch={dispatch} />
     </div>
   );
 };

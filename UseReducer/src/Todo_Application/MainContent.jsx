@@ -1,18 +1,18 @@
-const MainContent = () => {
+import Todos from "./Todos";
+
+const MainContent = ({ state, dispatch }) => {
   return (
     <div className="content">
       <ul>
-        <li>
-          <span>1</span> : Goto University <input type="checkbox" />
-          <button>Delete</button>
-          <button>Edit</button>
-        </li>
-
-        <li>
-          <span>1</span> : Goto University <input type="checkbox" />
-          <button>Delete</button>
-          <button>Edit</button>
-        </li>
+        {state.todo.map((todos, index) => (
+          <Todos
+            key={todos}
+            todos={todos}
+            index={index}
+            dispatch={dispatch}
+            state={state}
+          />
+        ))}
       </ul>
     </div>
   );

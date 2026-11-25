@@ -22,9 +22,21 @@ const Header = ({ state, dispatch }) => {
         className={`overlay ${state.modal ? "overlay_removed" : "add_opacity"}`}
       >
         <form onSubmit={(e) => handleForm(e)}>
-          <input type="text" placeholder="Todo " />
+          <input
+            type="text"
+            placeholder="Todo"
+            value={state.inputValue}
+            onChange={(e) =>
+              dispatch({ type: "inputs", payLoad: e.target.value })
+            }
+          />
           <div className="buttons">
-            <button className="submit">Add Todo</button>
+            <button
+              className="submit"
+              onClick={() => dispatch({ type: "add_todo" })}
+            >
+              Add Todo
+            </button>
             <button className="cancel" onClick={() => handleClose()}>
               Cancel
             </button>
